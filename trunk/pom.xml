@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>se.knowit.mobile</groupId>
+	<artifactId>hriv-mobile-ws</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.4-SNAPSHOT</version>
+	<name>hriv-mobile-ws Spring-WS Application</name>
+	<url>http://www.springframework.org/spring-ws</url>
+	<build>
+		<finalName>hriv-mobile-ws</finalName>
+		<testSourceDirectory>src/main/test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<!-- Dependency fixes m2eclipse issues -->
+				<dependencies>
+					<dependency>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+						<version>2.9.1</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>1</id>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+						<configuration>
+							<wsdlDirectory>${basedir}/src/main/resources/</wsdlDirectory>
+							<wsdlLocation>https://kivws.vgregion.se:10020/services?wsdl</wsdlLocation>
+							<wsdlFiles>
+								<wsdlFile>kivws.wsdl</wsdlFile>
+							</wsdlFiles>
+							<packageName>se.knowit.mobile.hriv.ws.kivws</packageName>
+							<extension>true</extension>
+							<sourceDestDir>${project.build.directory}/generated-sources/jaxws</sourceDestDir>
+							<staleFile>${project.build.directory}/generated-sources/jaxws/stale/.staleFlagKivutvws</staleFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!-- http://wiki.eclipse.org/M2E_plugin_execution_not_covered#execute_plugin_goal -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											jaxws-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.10,)
+										</versionRange>
+										<goals>
+											<goal>wsimport</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>3.0.1.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
+			<version>2.0.0-M1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.ldap</groupId>
+			<artifactId>spring-ldap-core</artifactId>
+			<version>1.3.0.RELEASE</version>
+		</dependency>
+<!-- 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+-->
+
+	</dependencies>
+</project>
