@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+This is the Integration Service (Webservice, Messaging, ...) Maven POM.
+
+
+Template version: 1.4
+Generation time : 2012-02-20 13:42:00 CET
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>se.vgregion.oppna-program-hsatools-mobile-webservice</groupId>
+    <artifactId>oppna-program-hsatools-mobile-webservice-core-bc</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+  <groupId>se.vgregion.oppna-program-hsatools-mobile-webservice</groupId>
+  <artifactId>oppna-program-hsatools-mobile-webservice-core-bc-module-intsvc</artifactId>
+  <packaging>war</packaging>
+  <name>${project.artifactId}</name>
+
+  <build>
+    <finalName>hriv-mobile-ws</finalName>
+    <plugins>
+      <plugin>
+        <inherited>true</inherited>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.8</version>
+        <configuration>
+          <contextPath>/hriv-mobile-ws</contextPath>
+          <!--<scanIntervalSeconds>1</scanIntervalSeconds>-->
+          <connectors>
+            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+              <port>9080</port>
+              <maxIdleTime>60000</maxIdleTime>
+            </connector>
+          </connectors>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <!-- http://wiki.eclipse.org/M2E_plugin_execution_not_covered#execute_plugin_goal -->
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.codehaus.mojo
+                    </groupId>
+                    <artifactId>
+                      jaxws-maven-plugin
+                    </artifactId>
+                    <versionRange>
+                      [1.10,)
+                    </versionRange>
+                    <goals>
+                      <goal>wsimport</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>oppna-program-hsatools-mobile-webservice-core-bc-composite-svc</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-oxm</artifactId>
+      <version>3.0.1.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.ws</groupId>
+      <artifactId>spring-ws-core</artifactId>
+      <version>2.0.0-M1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.ldap</groupId>
+      <artifactId>spring-ldap-core</artifactId>
+      <version>1.3.0.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>se.vgregion.commons-util</groupId>
+      <artifactId>commons-util-core-bc-composite-security</artifactId>
+      <version>3.10</version>
+    </dependency>
+  </dependencies>
+
+</project>
