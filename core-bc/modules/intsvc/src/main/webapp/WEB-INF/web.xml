@@ -34,4 +34,9 @@
     <url-pattern>*/jsonp</url-pattern>
   </filter-mapping>
 
+  <filter-mapping>
+    <filter-name>jsonpCallbackFilter</filter-name>
+    <url-pattern>*/jsonp.json</url-pattern>
+  </filter-mapping>
+
 </web-app>
