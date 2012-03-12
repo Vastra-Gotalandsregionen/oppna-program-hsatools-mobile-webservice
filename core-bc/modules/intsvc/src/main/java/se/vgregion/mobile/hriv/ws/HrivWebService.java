@@ -35,7 +35,7 @@ public class HrivWebService {
      * @return the resulting care units in a {@link ModelAndView} object
      */
     // Vårdmottagning
-    @RequestMapping({"/getCareUnits", "/getCareUnits/jsonp"})
+    @RequestMapping({"/getCareUnits"})
     public ModelAndView getCareUnits() {
         List<Unit> listOfUnits = getUnits(VgrCareType.CAREUNITS);
         ModelAndView modelAndView = new ModelAndView();
@@ -49,7 +49,7 @@ public class HrivWebService {
      * @return the resulting emergency units in a {@link ModelAndView} object
      */
     // Akutmottagning
-    @RequestMapping({"/getEmergencyUnits", "/getEmergencyUnits/jsonp"})
+    @RequestMapping({"/getEmergencyUnits"})
     public ModelAndView getEmergencyUnits() {
         List<String> emergencyHsaIdentities = new ArrayList<String>();
         emergencyHsaIdentities.add("SE2321000131-E000000000757");
@@ -82,7 +82,7 @@ public class HrivWebService {
      * @return the resulting duty units in a {@link ModelAndView} object
      */
     // Jourmottagning
-    @RequestMapping({"/getDutyUnits", "/getDutyUnits/jsonp"})
+    @RequestMapping({"/getDutyUnits"})
     public ModelAndView getDutyUnits() {
         List<Unit> listOfUnits = getUnits(VgrCareType.DUTYUNITS);
         ModelAndView modelAndView = new ModelAndView();
