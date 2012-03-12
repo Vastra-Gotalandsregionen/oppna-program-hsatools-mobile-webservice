@@ -47,6 +47,16 @@ Generation time : 2012-02-20 13:42:00 CET
           </connectors>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat6-maven-plugin</artifactId>
+        <version>2.0-beta-1</version>
+        <configuration>
+          <!-- http port -->
+          <port>9090</port>
+          <path>/hriv-mobile-ws</path>
+        </configuration>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>

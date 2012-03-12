@@ -12,6 +12,7 @@
 			<map>
 				<entry key="xml" value="application/xml" />
 				<entry key="json" value="application/json" />
+				<entry key="jsonp" value="application/json" />
 			</map>
 		</property>
 		<property name="defaultViews">
