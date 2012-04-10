@@ -1,5 +1,17 @@
 package se.vgregion.mobile.hriv.ws;
 
+import org.apache.cxf.configuration.jsse.TLSClientParameters;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.transport.http.HTTPConduit;
+import se.vgregion.mobile.hriv.kivws.VGRegionWebServiceImpl;
+import se.vgregion.mobile.hriv.kivws.VGRegionWebServiceImplPortType;
+import se.vgregion.ssl.ConvenientSslContextFactory;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
+import javax.xml.ws.BindingProvider;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Authenticator;
@@ -8,18 +20,6 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
-import javax.xml.ws.BindingProvider;
-
-import org.apache.cxf.configuration.jsse.TLSClientParameters;
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.transport.http.HTTPConduit;
-import se.vgregion.mobile.hriv.kivws.VGRegionWebServiceImpl;
-import se.vgregion.mobile.hriv.kivws.VGRegionWebServiceImplPortType;
-import se.vgregion.ssl.ConvenientSslContextFactory;
 
 public class KivwsFactoryBean {
 
@@ -44,6 +44,8 @@ public class KivwsFactoryBean {
         ConvenientSslContextFactory sslContextFactory = new ConvenientSslContextFactory(truststore, truststorePassword,
                 null, null);
         try {
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContextFactory.createSslContext().getSocketFactory());
+            // It is certainly sufficient with HttpsURLConnection.setDefaultSSLSocketFactory() but it doesn't hurt...
             SSLContext.setDefault(sslContextFactory.createSslContext());
         } catch (Exception e) {
             throw new RuntimeException(e);
