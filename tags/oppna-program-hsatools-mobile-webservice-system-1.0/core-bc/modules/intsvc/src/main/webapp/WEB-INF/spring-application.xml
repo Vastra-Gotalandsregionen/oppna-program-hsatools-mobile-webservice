@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+  <!-- Configures the @Controller programming model -->
+  <mvc:annotation-driven/>
+  <context:component-scan base-package="se.vgregion.mobile.hriv"/>
+
+  <context:property-placeholder location="classpath:security.properties" ignore-resource-not-found="false"
+                                ignore-unresolvable="false"/>
+
+  <bean class="se.vgregion.mobile.hriv.ws.filter.JsonpCallbackFilter" id="jsonpCallbackFilter"/>
+
+  <bean id="searchServiceKivws" class="se.vgregion.mobile.hriv.service.KivwsSearchService">
+    <property name="kivwsUnitMapper" ref="kivwsUnitMapper"/>
+    <property name="vgregionWebService">
+      <bean factory-bean="kivws" factory-method="createWebService"/>
+    </property>
+  </bean>
+
+  <bean id="kivwsUnitMapper" class="se.vgregion.mobile.hriv.utils.KivwsUnitMapper"/>
+
+  <bean id="kivws" class="se.vgregion.mobile.hriv.ws.KivwsFactoryBean">
+    <constructor-arg index="0" value="${hsatools.search.svc.kivws.username}"/>
+    <constructor-arg index="1" value="${hsatools.search.svc.kivws.password}"/>
+    <constructor-arg index="2" value="/SITHS.ts"/>
+    <constructor-arg index="3" value="changeit"/>
+  </bean>
+
+</beans>
