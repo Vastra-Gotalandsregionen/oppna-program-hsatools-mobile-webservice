@@ -79,7 +79,17 @@ public class KivwsSearchService implements SearchService {
         List<se.vgregion.mobile.hriv.kivws.Unit> unit = arrayOfUnit.getUnit();
         List<Unit> result = new ArrayList<Unit>();
         for (se.vgregion.mobile.hriv.kivws.Unit kivwsUnit : unit) {
-            result.add(kivwsUnitMapper.mapFromContext(kivwsUnit));
+            try {
+                result.add(kivwsUnitMapper.mapFromContext(kivwsUnit));
+            } catch (RuntimeException e) {
+                try {
+                    logger.error("Mapping failed for unit " + kivwsUnit.getDn().getValue(), e);
+                } catch (RuntimeException e1) {
+                    // In case of e.g. NullPointerException
+                    logger.error("Mapping failed for unit.", e);
+                    logger.error(e1.getMessage(), e1);
+                }
+            }
         }
         return result;
     }
