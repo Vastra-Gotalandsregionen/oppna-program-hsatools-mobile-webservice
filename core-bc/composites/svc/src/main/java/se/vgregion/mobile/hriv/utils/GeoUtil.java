@@ -18,9 +18,11 @@ public abstract class GeoUtil {
         int[] result = null;
         if (!"".equals(rt90String)) {
             if (rt90String.indexOf("X:") >= 0 && rt90String.indexOf("Y:") >= 0) {
-                Scanner scanner = new Scanner(rt90String);
-                int rt90X = Integer.parseInt(scanner.findInLine("\\d+"));
-                int rt90Y = Integer.parseInt(scanner.findInLine("\\d+"));
+                // Use Scanner to find next group of consecutive numbers.
+                // See se.vgregion.mobile.hriv.utils.GeoUtilTest.testParseRT90HsaString().
+                Scanner scanner = new Scanner(rt90String); // E.g. "X:6477382,Y:1272256"
+                int rt90X = Integer.parseInt(scanner.findInLine("\\d+")); // Will then return 6477382
+                int rt90Y = Integer.parseInt(scanner.findInLine("\\d+")); // Will then return 1272256
                 result = new int[]{rt90X, rt90Y};
             }
         }
