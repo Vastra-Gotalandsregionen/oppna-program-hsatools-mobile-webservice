@@ -11,7 +11,7 @@ Generation time : 2012-02-20 13:42:00 CET
   <parent>
     <groupId>se.vgregion.oppna-program-hsatools-mobile-webservice</groupId>
     <artifactId>oppna-program-hsatools-mobile-webservice-core-bc</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <groupId>se.vgregion.oppna-program-hsatools-mobile-webservice</groupId>
